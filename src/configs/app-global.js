@@ -1,6 +1,6 @@
 export const PROJECT_NAME = 'Foodyman marketplace';
 export const BASE_URL =
-  process.env.REACT_APP_BASE_URL || 'https://api.foodyman.org';
+  process.env.REACT_APP_BASE_URL || 'https://restaurantepos.camanchacapp.cl';
 export const WEBSITE_URL = 'https://restaurantepos.camanchacapp.cl';
 export const api_url = BASE_URL + '/api/v1/';
 export const api_url_admin = BASE_URL + '/api/v1/dashboard/admin/';
