@@ -1,6 +1,6 @@
 export const PROJECT_NAME = 'paygood';
 export const BASE_URL =
-  process.env.REACT_APP_BASE_URL || 'https://backendos.paygoodapp.com';
+  process.env.REACT_APP_BASE_URL || 'https://restaurantepos.camanchacapp.cl';
 export const WEBSITE_URL = 'https://paygoodapp.com';
 export const api_url = BASE_URL + '/api/v1/';
 export const api_url_admin = BASE_URL + '/api/v1/dashboard/admin/';
