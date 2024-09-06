@@ -5,7 +5,7 @@ import React, { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
-const baseUrl = 'https://qr-code-rho-bay.vercel.app';
+const baseUrl = 'https://menu.paygoodapp.com';
 
 const TableQrCode = ({ table }) => {
   const { settings } = useSelector((state) => state.globalSettings);
