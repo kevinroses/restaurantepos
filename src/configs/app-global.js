@@ -13,8 +13,8 @@ export const example = BASE_URL + '/';
 export const VAPID_KEY =
   'BOdUpBNJznAjb3HXW5Pf961CQm35Eoqn9g0K8bapkSzTLtPBECj19J7EgyKywOtCxBFIL6HD5lWhRBBQRkhMyUQ';
 
-export const LAT = 47.4143302506288;
-export const LNG = 8.532059477976883;
+export const LAT = 6.2442;
+export const LNG = -75.5812;
 
 export const API_KEY = 'AIzaSyCKJpRtqh68b0yQzBbiP76rr0UdwR1-CWw';
 export const AUTH_DOMAIN = 'paygood-df3bb.firebaseapp.com';
