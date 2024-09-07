@@ -20,19 +20,16 @@ import { useLocation } from 'react-router-dom';
 export default function ShopCategoryForm({ form, handleSubmit, error }) {
   const { t } = useTranslation();
   const { activeMenu } = useSelector((state) => state.menu, shallowEqual);
-  const { defaultLang, languages } = useSelector(
-    (state) => state.formLang,
-    shallowEqual,
-  );
+  const { languages } = useSelector((state) => state.formLang, shallowEqual);
   const location = useLocation();
 
-  //states
+  // States
   const [image, setImage] = useState(
     activeMenu.data?.image ? activeMenu.data?.image : [],
   );
   const [loadingBtn, setLoadingBtn] = useState(false);
 
-  // fetch functions
+  // Fetch functions
   async function fetchUserCategoryList(search) {
     const params = { perPage: 100, type: 'shop', search };
     return categoryService.getAll(params).then((res) => {
@@ -54,7 +51,7 @@ export default function ShopCategoryForm({ form, handleSubmit, error }) {
     });
   }
 
-  //submit form
+  // Submit form
   const onFinish = (values) => {
     setLoadingBtn(true);
     handleSubmit(values, image).finally(() => setLoadingBtn(false));
@@ -74,64 +71,50 @@ export default function ShopCategoryForm({ form, handleSubmit, error }) {
     >
       <Row gutter={12}>
         <Col span={12}>
-          {languages.map((item, index) => (
-            <Form.Item
-              key={item.title + index}
-              label={t('name')}
-              name={`title[${item.locale}]`}
-              help={
-                error
-                  ? error[`title.${defaultLang}`]
-                    ? error[`title.${defaultLang}`][0]
-                    : null
-                  : null
-              }
-              validateStatus={error ? 'error' : 'success'}
-              rules={[
-                {
-                  validator(_, value) {
-                    if (!value && item?.locale === defaultLang) {
-                      return Promise.reject(new Error(t('required')));
-                    } else if (value && value?.trim() === '') {
-                      return Promise.reject(new Error(t('no.empty.space')));
-                    } else if (value && value?.trim().length < 2) {
-                      return Promise.reject(new Error(t('must.be.at.least.2')));
-                    }
-                    return Promise.resolve();
-                  },
+          <Form.Item
+            label={t('name')}
+            name='title[en]'
+            help={error ? error['title.en']?.[0] : null}
+            validateStatus={error ? 'error' : 'success'}
+            rules={[
+              {
+                validator(_, value) {
+                  if (!value) {
+                    return Promise.reject(new Error(t('required')));
+                  } else if (value?.trim() === '') {
+                    return Promise.reject(new Error(t('no.empty.space')));
+                  } else if (value?.trim().length < 2) {
+                    return Promise.reject(new Error(t('must.be.at.least.2')));
+                  }
+                  return Promise.resolve();
                 },
-              ]}
-              hidden={item.locale !== defaultLang}
-            >
-              <Input placeholder={t('name')} />
-            </Form.Item>
-          ))}
+              },
+            ]}
+          >
+            <Input placeholder={t('name')} />
+          </Form.Item>
         </Col>
         <Col span={12}>
-          {languages.map((item, index) => (
-            <Form.Item
-              key={item.locale + index}
-              label={t('description')}
-              name={`description[${item.locale}]`}
-              rules={[
-                {
-                  validator(_, value) {
-                    if (!value && item?.locale === defaultLang) {
-                      return Promise.reject(new Error(t('required')));
-                    } else if (value && value?.trim() === '') {
-                      return Promise.reject(new Error(t('no.empty.space')));
-                    } else if (value && value?.trim().length < 5) {
-                      return Promise.reject(new Error(t('must.be.at.least.5')));
-                    }
-                    return Promise.resolve();
-                  },
+          <Form.Item
+            label={t('description')}
+            name='description[en]'
+            rules={[
+              {
+                validator(_, value) {
+                  if (!value) {
+                    return Promise.reject(new Error(t('required')));
+                  } else if (value?.trim() === '') {
+                    return Promise.reject(new Error(t('no.empty.space')));
+                  } else if (value?.trim().length < 5) {
+                    return Promise.reject(new Error(t('must.be.at.least.5')));
+                  }
+                  return Promise.resolve();
                 },
-              ]}
-              hidden={item.locale !== defaultLang}
-            >
-              <TextArea rows={4} />
-            </Form.Item>
-          ))}
+              },
+            ]}
+          >
+            <TextArea rows={4} />
+          </Form.Item>
         </Col>
         <Col span={12}>
           <Form.Item
