@@ -76,20 +76,7 @@ export default function ShopCategoryForm({ form, handleSubmit, error }) {
             name='title[en]'
             help={error ? error['title.en']?.[0] : null}
             validateStatus={error ? 'error' : 'success'}
-            rules={[
-              {
-                validator(_, value) {
-                  if (!value) {
-                    return Promise.reject(new Error(t('required')));
-                  } else if (value?.trim() === '') {
-                    return Promise.reject(new Error(t('no.empty.space')));
-                  } else if (value?.trim().length < 2) {
-                    return Promise.reject(new Error(t('must.be.at.least.2')));
-                  }
-                  return Promise.resolve();
-                },
-              },
-            ]}
+            
           >
             <Input placeholder={t('name')} />
           </Form.Item>
