@@ -11,18 +11,19 @@ export const export_url = BASE_URL + '/storage/';
 export const example = BASE_URL + '/';
 
 export const VAPID_KEY =
-  'BCtlROh6rJVlKAYUxmh-Oh55zbi3sEmNozSt3ARPGAAEpf5FzV-N2g53GOz4USMfiNa2bNt_v-Vn5uVPNAnny8c';
+  'BOdUpBNJznAjb3HXW5Pf961CQm35Eoqn9g0K8bapkSzTLtPBECj19J7EgyKywOtCxBFIL6HD5lWhRBBQRkhMyUQ';
 
 export const LAT = 6.2442;
 export const LNG = -75.5812;
 
-export const API_KEY = 'AIzaSyBaRHxGkP4GiZTeHUqr-uIlq0RuPWCpr0o';
-export const AUTH_DOMAIN = 'fitipay.firebaseapp.com';
-export const PROJECT_ID = 'fitipay';
-export const STORAGE_BUCKET = 'fitipay.appspot.com';
-export const MESSAGING_SENDER_ID = '625924305807';
-export const APP_ID = '1:625924305807:web:8b15132879742e644d51fa';
-export const MEASUREMENT_ID = 'G-M2J4VHKBQL';
+export const API_KEY = 'AIzaSyCKJpRtqh68b0yQzBbiP76rr0UdwR1-CWw';
+export const AUTH_DOMAIN = 'paygood-df3bb.firebaseapp.com';
+export const PROJECT_ID = 'paygood-df3bb';
+export const STORAGE_BUCKET = 'paygood-df3bb.appspot.com';
+export const MESSAGING_SENDER_ID = '812769775965';
+export const APP_ID = '1:812769775965:web:a381cd8bb6ebff337058b4';
+export const MEASUREMENT_ID = 'G-HKFJMB3D58';
+
 
 
 
