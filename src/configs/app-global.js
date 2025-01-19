@@ -6,7 +6,7 @@ export const api_url = BASE_URL + '/api/v1/';
 export const api_url_admin = BASE_URL + '/api/v1/dashboard/admin/';
 export const api_url_admin_dashboard = BASE_URL + '/api/v1/dashboard/';
 export const IMG_URL = '';
-export const MAP_API_KEY = 'AIzaSyBbfnvObzwcs6OLXOmSaG9CtIhwjmBwLTQ';
+export const MAP_API_KEY = 'AIzaSyBIIJsGIQp-R3ZLCP7EoPmSGfp5FuN1x0E';
 export const export_url = BASE_URL + '/storage/';
 export const example = BASE_URL + '/';
 
