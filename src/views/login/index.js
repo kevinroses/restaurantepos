@@ -135,7 +135,7 @@ const Login = () => {
     src='https://backendos.paygoodapp.com/storage/images/languages/logo.png'
     alt='Logo'
     className='brand-logo mx-auto'
-    style={{ maxHeight: '60px' }}
+    style={{ maxHeight: 'auto', width: 'auto' }}
   />
 </div>
 
