@@ -130,11 +130,15 @@ const Login = () => {
           <Col>
             <Card className='card'>
               <div className='my-4 pl-4 pr-4 w-100'>
-                <div className='app-brand text-center'>
-                  <Title className='brand-logo'>
-                    {settings.title || PROJECT_NAME}
-                  </Title>
-                </div>
+              <div className='app-brand text-center'>
+  <img
+    src='https://backendos.paygoodapp.com/storage/images/languages/logo.png'
+    alt='Logo'
+    className='brand-logo mx-auto'
+    style={{ maxHeight: '60px' }}
+  />
+</div>
+
                 <Row justify='center'>
                   <Col>
                     <Form
