@@ -61,7 +61,7 @@ export default function SellerSubscriptions() {
                 <Col sm={24} md={12} lg={8}>
                   <p>
                     Space, the final frontier. These are the voyages of the
-                    Starship Enterprise. Its five-year mission.
+                    Starship Enterprise. Its five-year mission.a
                   </p>
                 </Col>
               </Row>
@@ -84,41 +84,7 @@ export default function SellerSubscriptions() {
                       }
                     >
                       <div className='p-3'>
-                        <div className='text-center'>
-                          <h1 className='display-4 mt-4'>
-                            {defaultCurrency?.position === 'before' && (
-                              <span
-                                className='font-size-md d-inline-block mr-1'
-                                style={{ transform: 'translate(0px, -17px)' }}
-                              >
-                                {defaultCurrency?.symbol}
-                              </span>
-                            )}
-                            <span>{elm.price}</span>
-                            {defaultCurrency?.position === 'after' && (
-                              <span
-                                className='font-size-md d-inline-block mr-1'
-                                style={{ transform: 'translate(0px, -17px)' }}
-                              >
-                                {defaultCurrency?.symbol}
-                              </span>
-                            )}
-                          </h1>
-                          <p className='mb-0 text-lowercase'>
-                            {elm.month} {t('month')}
-                          </p>
-                          <p className='mb-0 text-lowercase'>
-                            {t('order.limit')} {elm?.order_limit}
-                          </p>
-                          <p className='mb-0 text-lowercase'>
-                            {t('product.limit')} {elm?.product_limit}
-                          </p>
-                          <p className='mb-0 text-lowercase'>
-                            {Boolean(elm?.with_report)
-                              ? t('with.report')
-                              : t('without.report')}
-                          </p>
-                        </div>
+                      
                         <div className='mt-4'>
                           <h2 className='text-center font-weight-semibold'>
                             {elm.type}
