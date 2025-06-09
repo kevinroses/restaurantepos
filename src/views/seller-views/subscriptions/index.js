@@ -104,7 +104,20 @@ export default function SellerSubscriptions() {
                               </span>
                             )}
                           </h1>
-                         
+                          <p className='mb-0 text-lowercase'>
+                            {elm.month} {t('month')}
+                          </p>
+                          <p className='mb-0 text-lowercase'>
+                            {t('order.limit')} {elm?.order_limit}
+                          </p>
+                          <p className='mb-0 text-lowercase'>
+                            {t('product.limit')} {elm?.product_limit}
+                          </p>
+                          <p className='mb-0 text-lowercase'>
+                            {Boolean(elm?.with_report)
+                              ? t('with.report')
+                              : t('without.report')}
+                          </p>
                         </div>
                         <div className='mt-4'>
                           <h2 className='text-center font-weight-semibold'>
