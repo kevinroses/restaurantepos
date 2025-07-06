@@ -8,11 +8,13 @@ import Loading from '../../../components/loading';
 import { toast } from 'react-toastify';
 import { fetchMyShop } from '../../../redux/slices/myShop';
 import Paystack from '../../../assets/images/paystack.svg';
-import MercadoPago from '../../../assets/images/mercado-pago.svg';
+import MercadoPago from '../../../assets/images/mercado-pago.svg'; // ✅ ICONO LOCAL AGREGADO
 import { FaPaypal } from 'react-icons/fa';
 import { SiStripe, SiRazorpay } from 'react-icons/si';
 import { AiOutlineWallet } from 'react-icons/ai';
 import restPaymentService from '../../../services/rest/payment';
+
+const acceptedPayments = ['wallet'];
 
 export default function SellerSubscriptionModal({ modal, handleCancel }) {
   const { t } = useTranslation();
@@ -78,7 +80,7 @@ export default function SellerSubscriptionModal({ modal, handleCancel }) {
     subscriptionService
       .attach(modal.id)
       .then(({ data }) => transactionCreate(data.id))
-      .catch(() => setLoadingBtn(false));
+      .error(() => setLoadingBtn(false));
   };
 
   function transactionCreate(id) {
@@ -96,7 +98,10 @@ export default function SellerSubscriptionModal({ modal, handleCancel }) {
   }
 
   const selectPayment = (type) => {
-    // ✅ Ahora se aceptan todos los métodos de pago sin restricción
+    if (!acceptedPayments.includes(type.label)) {
+      toast.warning(t('cannot.work.demo'));
+      return;
+    }
     setPaymentType(type);
   };
 
@@ -112,7 +117,7 @@ export default function SellerSubscriptionModal({ modal, handleCancel }) {
         return <SiRazorpay size={80} />;
       case 'paystack':
         return <img src={Paystack} alt='paystack' width='80' height='80' />;
-      case 'mercado-pago':
+      case 'mercado-pago': // ✅ ICONO LOCAL AGREGADO
         return <img src={MercadoPago} alt='mercadopago' width='80' height='80' />;
       default:
         return null;
@@ -145,7 +150,8 @@ export default function SellerSubscriptionModal({ modal, handleCancel }) {
             ?.map((item, index) => (
               <Col span={8} key={index}>
                 <Card
-                  className={`payment-card ${paymentType?.label === item.label ? 'active' : ''}`}
+                  className={`payment-card ${paymentType?.label === item.label ? 'active' : ''
+                    }`}
                   onClick={() => selectPayment(item)}
                 >
                   <div className='payment-icon'>
