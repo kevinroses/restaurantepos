@@ -13,7 +13,7 @@ export default function SellerSubscriptions() {
   const { t } = useTranslation();
   const { defaultCurrency } = useSelector(
     (state) => state.currency,
-    shallowEqual,
+    shallowEqual
   );
   const { myShop } = useSelector((state) => state.myShop, shallowEqual);
   const [modal, setModal] = useState(null);
@@ -28,27 +28,19 @@ export default function SellerSubscriptions() {
     subscriptionService
       .getAll()
       .then((res) => {
-        console.log('Subscription data:', res.data); // Verifica los datos aquí
         setData(res.data);
       })
       .finally(() => {
         setLoading(false);
         dispatch(disableRefetch(activeMenu));
-      })
-      .catch((error) => {
-        console.error('Error fetching subscriptions:', error); // Maneja errores aquí
-        setLoading(false);
       });
   };
 
   useEffect(() => {
-    console.log('Refetch triggered:', activeMenu.refetch); // Verifica el valor de activeMenu.refetch
     if (activeMenu.refetch) {
       fetchSubscriptionList();
     }
   }, [activeMenu.refetch]);
-
-  console.log('Subscription data state:', data); // Verifica el estado de los datos
 
   return (
     <>
@@ -61,61 +53,79 @@ export default function SellerSubscriptions() {
                 <Col sm={24} md={12} lg={8}>
                   <p>
                     Space, the final frontier. These are the voyages of the
-                    Starship Enterprise. Its five-year mission.a
+                    Starship Enterprise. Its five-year mission.
                   </p>
                 </Col>
               </Row>
             </div>
             <Row>
-              {data.length > 0 ? (
-                data.map((elm, i) => (
-                  <Col
-                    key={`price-column-${i}`}
-                    span={6}
-                    className={colCount === i + 1 ? '' : 'border-right'}
+              {data.map((elm, i) => (
+                <Col
+                  key={`price-column-${i}`}
+                  span={6}
+                  className={colCount === i + 1 ? '' : 'border-right'}
+                >
+                  <Badge.Ribbon
+                    text={t('active')}
+                    color='red'
+                    className={
+                      myShop?.subscription?.subscription?.id === elm.id
+                        ? ''
+                        : 'd-none'
+                    }
                   >
-                    <Badge.Ribbon
-                      text={t('active')}
-                      color='red'
-                      className={
-                        myShop?.subscription?.subscription?.id === elm.id
-                          ? ''
-                          : 'd-none'
-                      }
-                    >
-                      <div className='p-3'>
-                      
-                        <div className='mt-4'>
-                          <h2 className='text-center font-weight-semibold'>
-                            {elm.type}
-                          </h2>
-                        </div>
-                        <div className='d-flex justify-content-center mt-3'>
-                          <div>
-                            {features?.map((elm, i) => {
-                              return (
-                                <p key={`pricing-feature-${i}`}>
-                                  <Badge color={'blue'} />
-                                  <span>{elm}</span>
-                                </p>
-                              );
-                            })}
-                          </div>
-                        </div>
-                        <div className='mt-3 text-center'>
-                          <Button type='default' onClick={() => setModal(elm)}>
-                            {t('purchase')}
-                          </Button>
+                    <div className='p-3'>
+                      <div className='text-center'>
+                        <h1 className='display-4 mt-4'>
+                          <span
+                            className='font-size-md d-inline-block mr-1'
+                            style={{ transform: 'translate(0px, -17px)' }}
+                          >
+                            {defaultCurrency?.symbol}
+                          </span>
+                          <span>{elm.price}</span>
+                        </h1>
+                        <p className='mb-0 text-lowercase'>
+                          {elm.month} {t('month')}
+                        </p>
+                        <p className='mb-0 text-lowercase'>
+                          {t('order.limit')} {elm?.order_limit}
+                        </p>
+                        <p className='mb-0 text-lowercase'>
+                          {t('product.limit')} {elm?.product_limit}
+                        </p>
+                        <p className='mb-0 text-lowercase'>
+                          {Boolean(elm?.with_report)
+                            ? t('with.report')
+                            : t('without.report')}
+                        </p>
+                      </div>
+                      <div className='mt-4'>
+                        <h2 className='text-center font-weight-semibold'>
+                          {elm.type}
+                        </h2>
+                      </div>
+                      <div className='d-flex justify-content-center mt-3'>
+                        <div>
+                          {features?.map((elm, i) => {
+                            return (
+                              <p key={`pricing-feature-${i}`}>
+                                <Badge color={'blue'} />
+                                <span>{elm}</span>
+                              </p>
+                            );
+                          })}
                         </div>
                       </div>
-                    </Badge.Ribbon>
-                  </Col>
-                ))
-              ) : (
-                <Col span={24} className='text-center'>
-                  <p>No subscriptions available</p>
+                      <div className='mt-3 text-center'>
+                        <Button type='default' onClick={() => setModal(elm)}>
+                          {t('purchase')}
+                        </Button>
+                      </div>
+                    </div>
+                  </Badge.Ribbon>
                 </Col>
-              )}
+              ))}
             </Row>
           </div>
         ) : (
