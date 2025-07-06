@@ -6,6 +6,7 @@ import { fetchRestPayments } from '../../../redux/slices/payment';
 import Loading from '../../../components/loading';
 import { toast } from 'react-toastify';
 import Paystack from '../../../assets/images/paystack.svg';
+import MercadoPago from '../../../assets/images/mercado-pago.svg'; // ICONO AGREGADO
 import { FaPaypal } from 'react-icons/fa';
 import { SiStripe, SiRazorpay } from 'react-icons/si';
 import { AiOutlineWallet } from 'react-icons/ai';
@@ -29,7 +30,7 @@ export default function WalletTopUp({ open, handleCancel, refetch }) {
     (state) => state.globalSettings.settings,
     shallowEqual
   );
-  const [form] = Form.useForm()
+  const [form] = Form.useForm();
 
   async function fetchSellerPaymentList() {
     return await restPaymentService.getById(shop.id).then(({ data }) =>
@@ -42,6 +43,7 @@ export default function WalletTopUp({ open, handleCancel, refetch }) {
       )
     );
   }
+
   async function fetchPaymentList() {
     return restPaymentService.getAll().then(({ data }) =>
       setPaymentData2(
@@ -69,7 +71,8 @@ export default function WalletTopUp({ open, handleCancel, refetch }) {
     }
     setLoadingBtn(true);
     walletService
-      .topUp({ payment_type: paymentType.label, price: values.price }).then(({data}) => {
+      .topUp({ payment_type: paymentType.label, price: values.price })
+      .then(({ data }) => {
         form.resetFields();
         setPaymentType({});
         handleCancel();
@@ -77,7 +80,6 @@ export default function WalletTopUp({ open, handleCancel, refetch }) {
         window.open(data.data.url);
       })
       .finally(() => setLoadingBtn(false));
-   
   };
 
   const selectPayment = (type) => {
@@ -95,7 +97,11 @@ export default function WalletTopUp({ open, handleCancel, refetch }) {
       case 'razorpay':
         return <SiRazorpay size={80} />;
       case 'paystack':
-        return <img src={Paystack} alt='img' width='80' height='80' />;
+        return <img src={Paystack} alt='paystack' width='80' height='80' />;
+      case 'mercadopago': // ICONO AGREGADO
+        return <img src={MercadoPago} alt='mercadopago' width='80' height='80' />;
+      default:
+        return null;
     }
   };
 
@@ -121,7 +127,7 @@ export default function WalletTopUp({ open, handleCancel, refetch }) {
       ]}
     >
       {!loading ? (
-        <Form layout='vertical' id='payment' onFinish={handleSubmit}>
+        <Form layout='vertical' id='payment' onFinish={handleSubmit} form={form}>
           <Row gutter={12}>
             <Col span={24}>
               <Form.Item
@@ -145,9 +151,8 @@ export default function WalletTopUp({ open, handleCancel, refetch }) {
               ?.map((item, index) => (
                 <Col span={8} key={index}>
                   <Card
-                    className={`payment-card ${
-                      paymentType?.label === item.label ? 'active' : ''
-                    }`}
+                    className={`payment-card ${paymentType?.label === item.label ? 'active' : ''
+                      }`}
                     onClick={() => selectPayment(item)}
                   >
                     <div className='payment-icon'>
