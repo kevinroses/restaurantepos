@@ -8,14 +8,12 @@ import Loading from '../../../components/loading';
 import { toast } from 'react-toastify';
 import { fetchMyShop } from '../../../redux/slices/myShop';
 import Paystack from '../../../assets/images/paystack.svg';
-import MercadoPago from '../../../assets/images/mercado-pago.svg';
 import { FaPaypal } from 'react-icons/fa';
-import { SiStripe, SiRazorpay } from 'react-icons/si';
+import { SiStripe, SiRazorpay, SiMercadopago } from 'react-icons/si';
 import { AiOutlineWallet } from 'react-icons/ai';
 import restPaymentService from '../../../services/rest/payment';
 
-// Se agrega mercado-pago a las opciones permitidas
-const acceptedPayments = ['wallet', 'mercado-pago'];
+const acceptedPayments = ['wallet'];
 
 export default function SellerSubscriptionModal({ modal, handleCancel }) {
   const { t } = useTranslation();
@@ -73,32 +71,15 @@ export default function SellerSubscriptionModal({ modal, handleCancel }) {
       toast.warning(t('please.select.payment.type'));
       return;
     }
-
     if (paymentType.label === 'wallet' && seller?.wallet?.price < modal.price) {
       toast.warning(t('insufficient.balance'));
       return;
     }
-
-    if (paymentType.label === 'mercado-pago') {
-      setLoadingBtn(true);
-      // Llama al servicio para crear preferencia de Mercado Pago
-      mercadoPagoService.createPreference({ subscription_id: modal.id }).then((response) => {
-        if (response?.data?.init_point) {
-          window.location.href = response.data.init_point; // Redirigir al checkout
-        } else {
-          toast.error(t('error.generating.preference'));
-        }
-      }).catch(() => {
-        toast.error(t('error.generating.preference'));
-      }).finally(() => setLoadingBtn(false));
-      return;
-    }
-
     setLoadingBtn(true);
     subscriptionService
       .attach(modal.id)
       .then(({ data }) => transactionCreate(data.id))
-      .catch(() => setLoadingBtn(false));
+      .error(() => setLoadingBtn(false));
   };
 
   function transactionCreate(id) {
@@ -135,8 +116,8 @@ export default function SellerSubscriptionModal({ modal, handleCancel }) {
         return <SiRazorpay size={80} />;
       case 'paystack':
         return <img src={Paystack} alt='img' width='80' height='80' />;
-      case 'mercado-pago':
-        return <img src={MercadoPago} alt='img' width='80' height='80' />;
+      case 'mercadopago':
+        return <SiMercadopago size={80} color="#009EE3" />;
       default:
         return null;
     }
@@ -168,10 +149,14 @@ export default function SellerSubscriptionModal({ modal, handleCancel }) {
             ?.map((item, index) => (
               <Col span={8} key={index}>
                 <Card
-                  className={`payment-card ${paymentType?.label === item.label ? 'active' : ''}`}
+                  className={`payment-card ${
+                    paymentType?.label === item.label ? 'active' : ''
+                  }`}
                   onClick={() => selectPayment(item)}
                 >
-                  <div className='payment-icon'>{handleAddIcon(item?.label)}</div>
+                  <div className='payment-icon'>
+                    {handleAddIcon(item?.label)}
+                  </div>
                   <div className='font-weight-bold mt-2'>{t(item?.label)}</div>
                 </Card>
               </Col>
