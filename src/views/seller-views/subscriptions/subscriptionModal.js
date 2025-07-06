@@ -13,7 +13,6 @@ import { FaPaypal } from 'react-icons/fa';
 import { SiStripe, SiRazorpay } from 'react-icons/si';
 import { AiOutlineWallet } from 'react-icons/ai';
 import restPaymentService from '../../../services/rest/payment';
-import mercadoPagoService from '../../../services/rest/mercadoPago'; // nuevo servicio
 
 // Se agrega mercado-pago a las opciones permitidas
 const acceptedPayments = ['wallet', 'mercado-pago'];
