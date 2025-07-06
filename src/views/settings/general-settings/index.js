@@ -64,7 +64,7 @@ export default function GeneralSettings() {
         data.by_subscription = data.by_subscription === '1';
         data.reservation_enable_for_user =
           data.reservation_enable_for_user === '1';
-        data.is_demo = data.is_demo === '1';
+        data.is_demo = data.is_demo == '1';
         data.product_auto_approve = data?.product_auto_approve === '1';
         data.category_auto_approve = data?.category_auto_approve === '1';
         data.before_order_phone_required =
