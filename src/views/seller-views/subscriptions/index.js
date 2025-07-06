@@ -48,12 +48,11 @@ export default function SellerSubscriptions() {
         {!loading ? (
           <div>
             <div className='text-center mb-4'>
-              <h2 className='font-weight-semibold'>Pick a base plan</h2>
+              <h2 className='font-weight-semibold'>Elige un plan base</h2>
               <Row type='flex' justify='center'>
                 <Col sm={24} md={12} lg={8}>
                   <p>
-                    Space, the final frontier. These are the voyages of the
-                    Starship Enterprise. Its five-year mission.
+                   El espacio, la última frontera. Estos son los viajes de la nave espacial Enterprise. Su misión de cinco años.
                   </p>
                 </Col>
               </Row>
