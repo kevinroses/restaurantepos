@@ -8,8 +8,9 @@ import Loading from '../../../components/loading';
 import { toast } from 'react-toastify';
 import { fetchMyShop } from '../../../redux/slices/myShop';
 import Paystack from '../../../assets/images/paystack.svg';
+import MercadoPago from '../../../assets/images/mercado-pago.svg'; // ✅ ICONO LOCAL AGREGADO
 import { FaPaypal } from 'react-icons/fa';
-import { SiStripe, SiRazorpay, SiMercadopago } from 'react-icons/si';
+import { SiStripe, SiRazorpay } from 'react-icons/si';
 import { AiOutlineWallet } from 'react-icons/ai';
 import restPaymentService from '../../../services/rest/payment';
 
@@ -115,9 +116,9 @@ export default function SellerSubscriptionModal({ modal, handleCancel }) {
       case 'razorpay':
         return <SiRazorpay size={80} />;
       case 'paystack':
-        return <img src={Paystack} alt='img' width='80' height='80' />;
-      case 'mercadopago':
-        return <SiMercadopago size={80} color="#009EE3" />;
+        return <img src={Paystack} alt='paystack' width='80' height='80' />;
+      case 'mercadopago': // ✅ ICONO LOCAL AGREGADO
+        return <img src={MercadoPago} alt='mercadopago' width='80' height='80' />;
       default:
         return null;
     }
@@ -149,9 +150,8 @@ export default function SellerSubscriptionModal({ modal, handleCancel }) {
             ?.map((item, index) => (
               <Col span={8} key={index}>
                 <Card
-                  className={`payment-card ${
-                    paymentType?.label === item.label ? 'active' : ''
-                  }`}
+                  className={`payment-card ${paymentType?.label === item.label ? 'active' : ''
+                    }`}
                   onClick={() => selectPayment(item)}
                 >
                   <div className='payment-icon'>
