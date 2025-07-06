@@ -6,8 +6,9 @@ import Paystack from '../../assets/images/paystack.svg';
 import { FaPaypal } from 'react-icons/fa';
 import { SiStripe, SiRazorpay } from 'react-icons/si';
 import { AiOutlineWallet } from 'react-icons/ai';
-import restPaymentService from '../../services/rest/payment';
 import { BsCoin } from 'react-icons/bs';
+import { SiMercadopago } from 'react-icons/si'; // ícono para Mercado Pago
+import restPaymentService from '../../services/rest/payment';
 
 export default function PaymentPartnersConfirmation({
   open,
@@ -66,6 +67,8 @@ export default function PaymentPartnersConfirmation({
         return <SiRazorpay size={80} />;
       case 'paystack':
         return <img src={Paystack} alt='img' width='80' height='80' />;
+      case 'mercado-pago': // nombre del método que debes recibir desde la API
+        return <SiMercadopago size={80} />;
       default:
         return <BsCoin size={80} />;
     }
@@ -94,7 +97,9 @@ export default function PaymentPartnersConfirmation({
       <Spin spinning={paymentsLoading}>
         <Row gutter={12}>
           {paymentData?.map((item, index) =>
-            item.label === 'cash' || item.label === 'wallet' ? (
+            item.label === 'cash' ||
+            item.label === 'wallet' ||
+            item.label === 'mercado_pago' ? ( // aquí ya mostramos Mercado Pago también
               <Col span={12} key={index}>
                 <Card
                   style={{ display: 'flex', justifyContent: 'center' }}
