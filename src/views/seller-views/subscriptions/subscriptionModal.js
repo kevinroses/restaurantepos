@@ -117,7 +117,7 @@ export default function SellerSubscriptionModal({ modal, handleCancel }) {
         return <SiRazorpay size={80} />;
       case 'paystack':
         return <img src={Paystack} alt='paystack' width='80' height='80' />;
-      case 'mercadopago': // ✅ ICONO LOCAL AGREGADO
+      case 'mercado-pago': // ✅ ICONO LOCAL AGREGADO
         return <img src={MercadoPago} alt='mercadopago' width='80' height='80' />;
       default:
         return null;
