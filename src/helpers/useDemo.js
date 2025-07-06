@@ -23,7 +23,7 @@ export default function useDemo() {
   const demoMeneger = DEMO_MANEGER;
 
   return {
-    isDemo: settings?.is_demo == '0',
+    isDemo: settings?.is_demo == '1',
     demoFunc: () => toast.warning(t('cannot.work.demo')),
     demoSeller,
     demoDeliveryman,
