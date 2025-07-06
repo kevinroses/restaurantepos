@@ -51,9 +51,7 @@ export default function SellerSubscriptions() {
               <h2 className='font-weight-semibold'>Elige un plan base</h2>
               <Row type='flex' justify='center'>
                 <Col sm={24} md={12} lg={8}>
-                  <p>
-                   El espacio, la última frontera. Estos son los viajes de la nave espacial Enterprise. Su misión de cinco años.
-                  </p>
+                  <p> </p>
                 </Col>
               </Row>
             </div>
